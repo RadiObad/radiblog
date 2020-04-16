@@ -1,0 +1,162 @@
+{% extends 'ispan/ispan_base.html' %}
+{% load urlify %}
+
+{% load staticfiles %}
+{% block title %} {{ post.title |upper }} | BLOG.DEV {% endblock title %}
+
+{% block content %}
+  <!--   <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url({{ post.referential_image.url }});">
+      <div class="container">
+        <div class="row same-height justify-content-center">
+          <div class="col-md-12 col-lg-10">
+            <div class="post-entry text-center">
+              <span class="post-category text-white bg-success mb-3">{{ post.category }}</span>
+              <h1 class="mb-4"><a href="{% url 'posts:detail_post' post.slug %}">{{ post.title |upper }}</a></h1>
+              <div class="post-meta align-items-center text-center">
+                <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="{{ post.author.referential_image.url }}" alt="Image" class="img-fluid"></figure>
+                <span class="d-inline-block mt-1">{{ post.author }}</span>
+                <span>{{ post.publication_date }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> -->
+
+    <section class="site-section py-lg">
+      <div class="container">
+
+        <div class="row">
+
+          <div class="col-md-12 col-lg-8 main-content">
+
+            <div class="post-content-body">
+              {{ post.content |safe }}
+            </div>
+          </div>
+
+          <!-- END main-content -->
+
+          
+ <div class="col-md-12 col-lg-4 sidebar">
+        
+            
+            <div class="sidebar-box">
+              <!-- <h3 class="heading">Popular Posts</h3> -->
+              <div class="post-entry-sidebar">
+                <ul>
+                  <li>
+                    <a href="{{post1.get_absolute_url}}">
+                      <img src="{{post1.referential_image.url}}" alt="Image placeholder" class="ml-4">
+                      <div class="text">
+                        <h4>{{post1.title}}</h4>
+                      
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{post2.get_absolute_url}}">
+                      <img src="{{post2.referential_image.url}}" alt="Image placeholder" class="ml-4">
+                      <div class="text">
+                        <h4>{{post2.title}}</h4>
+                      
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{post3.get_absolute_url}}">
+                      <img src="{{post3.referential_image.url}}" alt="Image placeholder" class="ml-4">
+                      <div class="text">
+                        <h4>{{post3.title}}</h4>
+                      
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{post4.get_absolute_url}}">
+                      <img src="{{post4.referential_image.url}}" alt="Image placeholder" class="ml-4">
+                      <div class="text">
+                        <h4>{{post4.title}}</h4>
+                      
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- END sidebar-box -->
+
+            <div class="sidebar-box">
+              <h3 class="heading">Categories</h3>
+              <ul class="categories">
+                <li><a href="#">Food <span>(12)</span></a></li>
+                <li><a href="#">Travel <span>(22)</span></a></li>
+                <li><a href="#">Lifestyle <span>(37)</span></a></li>
+                <li><a href="#">Business <span>(42)</span></a></li>
+                <li><a href="#">Adventure <span>(14)</span></a></li>
+              </ul>
+            </div>
+            <!-- END sidebar-box -->
+
+            <div class="sidebar-box">
+              <h3 class="heading">Tags</h3>
+              <ul class="tags">
+                <li><a href="#">Travel</a></li>
+                <li><a href="#">Adventure</a></li>
+                <li><a href="#">Food</a></li>
+                <li><a href="#">Lifestyle</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Freelancing</a></li>
+                <li><a href="#">Travel</a></li>
+                <li><a href="#">Adventure</a></li>
+                <li><a href="#">Food</a></li>
+                <li><a href="#">Lifestyle</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Freelancing</a></li>
+              </ul>
+            </div>
+    </div>
+        <!-- {{ share_string }}<br> -->
+      <!-- {{ post.content|urlify }} -->
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
+    Share on Facebook
+    </a>
+
+    <a href="https://twitter.com/home?status={{ post.content|urlify }}%20{{ request.build_absolute_uri }}">
+    Share on Twitter
+    </a>
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title=B{{post.title}}&summary={{ post.content|urlify }}&source={{ request.build_absolute_uri }}">
+    Share on Linkedin
+    </a>
+    <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Share on Google+</a>
+      </div>
+    </section>
+
+
+
+
+    <div class="container py-5">
+      <div id="disqus_thread"></div>
+      <script>
+
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://blog-dev2.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+    </section>
+{% endblock content %}

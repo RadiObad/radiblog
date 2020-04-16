@@ -1,0 +1,74 @@
+{% extends 'ispan/ispan_base.html' %}
+{% load staticfiles %}
+{% block title %} {{ category |upper }} | BLOG.DEV {% endblock title %}
+
+{% block content %}
+    <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url({{category.referential_image.url}});">
+      <div class="container">
+        <div class="row same-height justify-content-center">
+          <div class="col-md-12 col-lg-10">
+            <div class="post-entry text-center">
+              <span class="post-category text-white bg-success mb-3">{{ category | upper }}</span>
+              <h1 class="mb-4"><a href="{{ request.build_absolute.url }}">{{ category | upper }}</a></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="site-section py-lg">
+      <div class="container">
+             <!-- Page Heading -->
+            <h1 class="my-4">List Posts
+            </h1>
+          <div class="row blog-entries element-animate ">
+
+            <div class="col-md-8 col-lg-8 main-content">
+              {%for bom in posts%}
+            <div class="row mb-2">
+              <div class="col-md-4">
+                {% if bom.category %}
+                <span class="post-category text-white bg-danger">{{ bom.category |upper }}</span>
+                {% endif %}
+                <a href="#">
+                  <img class="img-fluid rounded mb-3 mb-md-0" src="{{bom.referential_image.url}}" alt="">
+                </a>
+
+              </div>
+              <div class="col-md-8">
+                <h3>{{ bom.title }}</h3>
+                <p>{{ bom.description|slice:":120" }}</p>
+                <a class="btn btn-primary more-link" href="{% url 'posts:detail_post' bom.slug %}">View Project</a>
+              </div>
+            </div>
+            {% endfor %}
+            <!-- /.row -->
+      
+
+           </div>
+            {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+
+          <!-- END main-content -->
+
+        </div>
+   <!-- Pagination -->
+              <div class="pagination mt-5 pt-5">
+                    <span class="step-links">
+                        {% if posts.has_previous %}
+                            <!-- <a href="?page=1">&laquo; first</a> -->
+                            <a href="?page={{ posts.previous_page_number }}"class="btn btn-primary nextpage">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                        </span>
+
+                        {% if posts.has_next %}
+                            <a href="?page={{ posts.next_page_number }}" class="btn btn-primary nextpage">next</a>
+                            <!-- <a href="?page={{ post_general.paginator.num_pages }}">last &raquo;</a> -->
+                        {% endif %}
+                    </span>
+            </div>
+      </div>
+    </section>
+{% endblock content %}

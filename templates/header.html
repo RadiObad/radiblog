@@ -1,0 +1,99 @@
+ <header id="header">
+    <!-- Nav -->
+    <nav id="nav">
+        <!-- Main Nav -->
+        <div id="nav-fixed">
+
+         <nav class="navbar navbar-expand-lg main-nav sticky-top navbar-light bg-light menu-wrapper" id=" mainNav" style="background-color: #fff !important;">
+              <div class="container">
+                  <a class="navbar-brand" href="{% url 'posts:post-list' %}">جــانــجــو <span class="blou-logo">عـربـي</span>
+                  </a>
+                 
+                  <div class="collapse navbar-collapse" id="navbarResponsive">
+                      <ul class="navbar-nav nav-menu ml-auto">
+
+                          {% for menu in menu %}
+                            <li class="nav-item cat-{{ forloop.counter }} text-black"><a href="{% url 'posts:category' menu.menu %}" class="nav-link text-black font-weight-bold">{{ menu.menu }}</a></li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+                  
+                  <!-- search & aside toggle -->
+                      <div class="nav-btns">
+                          <button class="aside-btn"><i class="fa fa-bars"></i></button>
+                          <button class="search-btn"><i class="fa fa-search"></i></button>
+                           <form class="search-form" method="POST" action="{% url 'posts:search' %}">
+                              {% csrf_token %}
+                              <div class="search-form">
+                                  <input class="search-input" type="text" name="search" placeholder="Enter Your Search ...">
+                                  <button class="search-close"><i class="fa fa-times"></i></button>
+                              </div>                        
+                            </form>
+                      </div>
+                      <!-- /search & aside toggle -->
+              </div>
+          </nav>
+         </div>
+        <!-- Aside Nav -->
+                <div id="nav-aside">
+                    <!-- nav -->
+                    <div class="section-row">
+                        <ul class="nav-aside-menu">
+                            <li><a href="{% url 'posts:post-list' %}">الرئيسية</a></li>
+                            <li><a href="#">من نحن</a></li>
+                            <li><a href="#">تواصل معنا</a></li>
+                        </ul>
+                    </div>
+                    <!-- /nav -->
+                     <!-- nav -->
+                    <div class="section-row sooooo">
+                        <ul class="nav-aside-menu">
+                            <li><a href="">الجديدة</a></li>
+                            <li><a href="">المستقبلية</a></li>
+                            {% for menu in menu %}
+                            <li><a href="{% url 'posts:category' menu.menu %}">{{ menu.menu }}</a></li>
+                            {% endfor %}
+                            
+                        </ul>
+                    </div>
+                    <!-- /nav -->
+
+                    <!-- widget posts -->
+                    <div class="section-row">
+                        <h3>Recent Posts</h3>
+                        {%  for post in recent_post%}
+                        <div class="post post-widget">
+                            <a class="post-img" href="{{post.get_absolute_url}}">
+                              <img src="{{post.referential_image.url}}" alt="">
+                            </a>
+                            <div class="post-body">
+                                <h3 class="post-title"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                     
+
+                    </div>
+                    <!-- /widget posts -->
+
+                    <!-- social links -->
+                    <div class="section-row">
+                        <h3>Follow us</h3>
+                        <ul class="nav-aside-social">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- /social links -->
+
+                    <!-- aside nav close -->
+                    <button class="nav-aside-close"><i class="fa fa-times"></i></button>
+                    <!-- /aside nav close -->
+                </div>
+        <!-- /Aside Nav -->
+
+    </nav>
+  </header>

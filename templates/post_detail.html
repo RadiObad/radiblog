@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% load static %}
+{% load urlify %}
+
+{% block head_title %}
+ {{block.super}} | {{title}}
+{% endblock head_title %}
+{% block content %}
+<style type="text/css">
+	.post.post-thumb {
+    position: relative;
+}
+.post .post-img {
+    display: block;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+}
+.post .post-img > img {
+    width: 100%;
+}
+.post.post-thumb .post-img::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: -webkit-gradient(linear, left bottom, left top, from(rgba(33, 38, 49, 0.3)), to(transparent));
+    background: linear-gradient(to top, rgba(33, 38, 49, 0.3) 0%, transparent 100%);
+}
+.post.post-thumb .post-body {
+    position: absolute;
+    bottom: 0px;
+    padding: 20px 15px;
+}
+.post .post-meta {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+.post-meta .post-category.cat-2 {
+    background-color: #ff8700;
+}
+.post-meta .post-category.cat-3 {
+    background-color: #8d00ff;
+}
+.post-meta .post-category {
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    font-weight: 600;
+    border-radius: 2px;
+    margin-right: 15px;
+    color: #FFF;
+    background-color: #212631;
+    -webkit-transition: 0.2s opacity;
+    transition: 0.2s opacity;
+}
+.post.post-thumb .post-meta .post-date {
+    color: #eceef2;
+}
+.post-meta .post-date {
+    font-size: 13px;
+    font-weight: 600;
+}
+.post.post-thumb .post-title {
+    font-size: 22px;
+}
+.post .post-title {
+    font-size: 18px;
+    margin-bottom: 0px;
+}
+.post.post-thumb .post-title > a {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 500;
+}
+.post.post-thumb .post-title > a:hover {
+	text-decoration: none;
+}
+
+.post-meta .post-category.cat-1 {
+     background-color: #4BB92F;
+}
+ .post-meta .post-category.cat-2 {
+     background-color: #ff8700;
+}
+ .post-meta .post-category.cat-3 {
+     background-color: #8d00ff;
+}
+ .post-meta .post-category.cat-4 {
+     background-color: #0078ff;
+}
+ .post-meta .post-date {
+     font-size: 13px;
+     font-weight: 600;
+}
+ .post .post-title {
+     font-size: 18px;
+     margin-bottom: 0px;
+}
+ .post-tags li {
+     display:inline-block;
+     margin-right:3px;
+     margin-bottom:5px;
+}
+ .post-tags li a {
+     display:block;
+     color:#fff;
+     background-color: #212631;
+     padding:3px 10px;
+     font-weight:600;
+     border-radius:2px;
+     -webkit-transition:0.2s opacity;
+     transition:0.2s opacity;
+}
+p{
+	font-size: 19px;
+	line-height: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+</style>
+  <!-- Page Content -->
+  <div class="container">
+
+	 <div class="row mt-5">
+
+	      <!-- Post Content Column -->
+	   	  <div class="col-lg-8">
+		        <h1 class="mb-4">{{instance.title}}</h1> 
+		        <!-- Preview Image -->
+		        <!-- <img class="img-fluid rounded" src="{{instance.referential_image.url}}" alt=""> -->
+				<div class="post-content-body">
+		              {{ instance.content |safe }}
+		        </div>
+		        <hr>
+	      </div>
+	      <!-- /post Content  -->
+
+	  		<div class="col-lg-4">
+	  			
+	  			<!-- recent post -->
+	  			<div class="my-4 ">	
+	  					<div class="mb-4">
+	  						<h2>أطلع ايضا على</h2>
+	  					</div>
+						<!-- post1 -->
+						<div class="post post-thumb mb-4">
+							<a class="post-img" href="{% url 'posts:detail_post' post1.slug%}">
+								<img src="{{post1.referential_image.url}}" alt="">
+							</a>
+							<div class="post-body">
+								<div class="post-meta">
+									<span class="post-category cat-1">
+										{{post1.category}}
+									</span>
+								</div>
+								<h3 class="post-title">
+									<a href="{% url 'posts:detail_post' post1.slug %}">
+										{{post1.title}}
+									</a>
+								</h3>
+							</div>
+						</div>
+						<!-- /post1 -->
+
+						<!--post2  -->
+						<div class="post post-thumb mb-4">
+							<a class="post-img" href="{% url 'posts:detail_post' post2.slug%}">
+								<img src="{{post2.referential_image.url}}" alt="">
+							</a>
+							<div class="post-body">
+								<div class="post-meta">
+									<a class="post-category cat-1" href="{% url 'posts:category' post2.category %}">
+										{{post2.category}}
+									</a>
+								</div>
+								<h3 class="post-title">
+									<a href="{% url 'posts:detail_post' post2.slug %}">
+										{{post2.title}}
+									</a>
+								</h3>
+							</div>
+						</div>
+						<!-- /post2 -->
+				</div>
+				<!-- /recent post -->
+
+
+				<!-- add some thin new -->
+		        <!-- 
+		        <div class="card my-4">
+		          <h5 class="card-header">Side Widget</h5>
+		          <div class="card-body">
+		            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+		          </div>
+		        </div>
+		         -->
+
+	       	</div>
+     </div>
+    <!-- /.row -->
+   </div>
+  <!-- /.container -->
+
+{% endblock content %}
+
+
+
+ {%block script%}
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		$(".post-content-body p img").each(function(){
+ 			$(this).addClass("img-fluid")
+ 		})
+
+ 	})
+ </script>	
+ {%endblock%}
+
+
+
